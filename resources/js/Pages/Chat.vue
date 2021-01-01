@@ -13,39 +13,11 @@
                     <!-- lista de usuarios -->
                     <div class="w-3/12 bg-gray-200 bg-opacity-25 border-r border-gray-200 overflow-y-scroll">
                         <ul>
-                            <li class="p-6 text-lg text-gray-600 leading-7 font-semibold border-b border-gray-200 hover:bg-gray-200 hover:bg-opacity-50 hover:cursor-pointer">
+                            <li
+                                v-for="user in users" :key="user.id"
+                                class="p-6 text-lg text-gray-600 leading-7 font-semibold border-b border-gray-200 hover:bg-gray-200 hover:bg-opacity-50 hover:cursor-pointer">
                                 <p class="flex items-center">
-                                    Kevin Smith
-                                    <span class="ml-2 w-2 h-2 bg-blue-500 rounded-full"></span>
-                                </p>
-                            </li>
-                            <li class="p-6 text-lg text-gray-600 leading-7 font-semibold border-b border-gray-200 hover:bg-gray-200 hover:bg-opacity-50 hover:cursor-pointer">
-                                <p class="flex items-center">
-                                    Kiwane Marcondes
-                                    <span class="ml-2 w-2 h-2 bg-blue-500 rounded-full"></span>
-                                </p>
-                            </li>
-                            <li class="p-6 text-lg text-gray-600 leading-7 font-semibold border-b border-gray-200 hover:bg-gray-200 hover:bg-opacity-50 hover:cursor-pointer">
-                                <p class="flex items-center">
-                                    Kiwane Marcondes
-                                    <span class="ml-2 w-2 h-2 bg-blue-500 rounded-full"></span>
-                                </p>
-                            </li>
-                            <li class="p-6 text-lg text-gray-600 leading-7 font-semibold border-b border-gray-200 hover:bg-gray-200 hover:bg-opacity-50 hover:cursor-pointer">
-                                <p class="flex items-center">
-                                    Kiwane Marcondes
-                                    <span class="ml-2 w-2 h-2 bg-blue-500 rounded-full"></span>
-                                </p>
-                            </li>
-                            <li class="p-6 text-lg text-gray-600 leading-7 font-semibold border-b border-gray-200 hover:bg-gray-200 hover:bg-opacity-50 hover:cursor-pointer">
-                                <p class="flex items-center">
-                                    Kiwane Marcondes
-                                    <span class="ml-2 w-2 h-2 bg-blue-500 rounded-full"></span>
-                                </p>
-                            </li>
-                            <li class="p-6 text-lg text-gray-600 leading-7 font-semibold border-b border-gray-200 hover:bg-gray-200 hover:bg-opacity-50 hover:cursor-pointer">
-                                <p class="flex items-center">
-                                    Kiwane Marcondes
+                                    {{ user.name }}
                                     <span class="ml-2 w-2 h-2 bg-blue-500 rounded-full"></span>
                                 </p>
                             </li>
@@ -143,6 +115,17 @@
         components: {
             AppLayout,
 
+        },
+        data(){
+            return{
+                users: []
+            }
+        },
+        mounted() {
+            axios.get('api/users').then(response => {
+                this.users = response.data.users
+                console.log(response);
+            })
         },
     }
 </script>

@@ -3525,38 +3525,23 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
     AppLayout: _Layouts_AppLayout__WEBPACK_IMPORTED_MODULE_0__["default"]
+  },
+  data: function data() {
+    return {
+      users: []
+    };
+  },
+  mounted: function mounted() {
+    var _this = this;
+
+    axios.get('api/users').then(function (response) {
+      _this.users = response.data.users;
+      console.log(response);
+    });
   }
 });
 
@@ -48399,115 +48384,33 @@ var render = function() {
                     "w-3/12 bg-gray-200 bg-opacity-25 border-r border-gray-200 overflow-y-scroll"
                 },
                 [
-                  _c("ul", [
-                    _c(
-                      "li",
-                      {
-                        staticClass:
-                          "p-6 text-lg text-gray-600 leading-7 font-semibold border-b border-gray-200 hover:bg-gray-200 hover:bg-opacity-50 hover:cursor-pointer"
-                      },
-                      [
-                        _c("p", { staticClass: "flex items-center" }, [
-                          _vm._v(
-                            "\n                                Kevin Smith\n                                "
-                          ),
-                          _c("span", {
-                            staticClass: "ml-2 w-2 h-2 bg-blue-500 rounded-full"
-                          })
-                        ])
-                      ]
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "li",
-                      {
-                        staticClass:
-                          "p-6 text-lg text-gray-600 leading-7 font-semibold border-b border-gray-200 hover:bg-gray-200 hover:bg-opacity-50 hover:cursor-pointer"
-                      },
-                      [
-                        _c("p", { staticClass: "flex items-center" }, [
-                          _vm._v(
-                            "\n                                Kiwane Marcondes\n                                "
-                          ),
-                          _c("span", {
-                            staticClass: "ml-2 w-2 h-2 bg-blue-500 rounded-full"
-                          })
-                        ])
-                      ]
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "li",
-                      {
-                        staticClass:
-                          "p-6 text-lg text-gray-600 leading-7 font-semibold border-b border-gray-200 hover:bg-gray-200 hover:bg-opacity-50 hover:cursor-pointer"
-                      },
-                      [
-                        _c("p", { staticClass: "flex items-center" }, [
-                          _vm._v(
-                            "\n                                Kiwane Marcondes\n                                "
-                          ),
-                          _c("span", {
-                            staticClass: "ml-2 w-2 h-2 bg-blue-500 rounded-full"
-                          })
-                        ])
-                      ]
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "li",
-                      {
-                        staticClass:
-                          "p-6 text-lg text-gray-600 leading-7 font-semibold border-b border-gray-200 hover:bg-gray-200 hover:bg-opacity-50 hover:cursor-pointer"
-                      },
-                      [
-                        _c("p", { staticClass: "flex items-center" }, [
-                          _vm._v(
-                            "\n                                Kiwane Marcondes\n                                "
-                          ),
-                          _c("span", {
-                            staticClass: "ml-2 w-2 h-2 bg-blue-500 rounded-full"
-                          })
-                        ])
-                      ]
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "li",
-                      {
-                        staticClass:
-                          "p-6 text-lg text-gray-600 leading-7 font-semibold border-b border-gray-200 hover:bg-gray-200 hover:bg-opacity-50 hover:cursor-pointer"
-                      },
-                      [
-                        _c("p", { staticClass: "flex items-center" }, [
-                          _vm._v(
-                            "\n                                Kiwane Marcondes\n                                "
-                          ),
-                          _c("span", {
-                            staticClass: "ml-2 w-2 h-2 bg-blue-500 rounded-full"
-                          })
-                        ])
-                      ]
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "li",
-                      {
-                        staticClass:
-                          "p-6 text-lg text-gray-600 leading-7 font-semibold border-b border-gray-200 hover:bg-gray-200 hover:bg-opacity-50 hover:cursor-pointer"
-                      },
-                      [
-                        _c("p", { staticClass: "flex items-center" }, [
-                          _vm._v(
-                            "\n                                Kiwane Marcondes\n                                "
-                          ),
-                          _c("span", {
-                            staticClass: "ml-2 w-2 h-2 bg-blue-500 rounded-full"
-                          })
-                        ])
-                      ]
-                    )
-                  ])
+                  _c(
+                    "ul",
+                    _vm._l(_vm.users, function(user) {
+                      return _c(
+                        "li",
+                        {
+                          key: user.id,
+                          staticClass:
+                            "p-6 text-lg text-gray-600 leading-7 font-semibold border-b border-gray-200 hover:bg-gray-200 hover:bg-opacity-50 hover:cursor-pointer"
+                        },
+                        [
+                          _c("p", { staticClass: "flex items-center" }, [
+                            _vm._v(
+                              "\n                                " +
+                                _vm._s(user.name) +
+                                "\n                                "
+                            ),
+                            _c("span", {
+                              staticClass:
+                                "ml-2 w-2 h-2 bg-blue-500 rounded-full"
+                            })
+                          ])
+                        ]
+                      )
+                    }),
+                    0
+                  )
                 ]
               ),
               _vm._v(" "),
