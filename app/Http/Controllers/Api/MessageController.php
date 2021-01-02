@@ -3,34 +3,48 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Models\Message;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Response;
 
-class UserController extends Controller
+class MessageController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function me()
+    public function listMessages(User $user)
     {
-        $userLogged = Auth::user();
+        $userFrom = Auth::user()->id;
+        $userTo = $user->id;
 
-        return response()->json(['user' => $userLogged], Response::HTTP_OK);
+        $messages = Message::where(
+            function ($query) use ($userFrom, $userTo) {
+                $query-> where([
+                    'from' => $userFrom,
+                    'to' => $userTo
+                ]);
+            }
+        )->orWhere(
+            function ($query) use ($userFrom, $userTo) {
+                $query-> where([
+                    'from' => $userTo,
+                    'to' => $userFrom
+                ]);
+            }
+        )->orderBy('created_at', 'ASC')->get();
+
+        return response()->json([
+            'messages' => $messages
+        ],Response::HTTP_OK);
     }
-
 
     public function index()
     {
-        $userLogged = Auth::user();
-        $users = User::where('id', '!=', $userLogged->id)->get();
-
-        return response()->json([
-            'users' => $users
-        ], Response::HTTP_OK);
+        //
     }
 
     /**
@@ -41,7 +55,12 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $message = new Message();
+        $message->from = Auth::user()->id;
+        $message->to = $request->to;
+        $message->content = filter_var($request->content, FILTER_SANITIZE_STRIPPED);
+        $message->save();
+
     }
 
     /**
@@ -50,9 +69,9 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(User $user)
+    public function show($id)
     {
-        return response()->json(['user' => $user], Response::HTTP_OK);
+        //
     }
 
     /**
