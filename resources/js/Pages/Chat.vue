@@ -1,17 +1,17 @@
 <template>
-    <app-layout>
+    <PagesLayout>
         <template #header>
-            <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+            <h2 class="font-semibold text-xl text-yellow-200 leading-tight px-10">
                 Chat
             </h2>
         </template>
 
-        <div class="py-12">
+        <div class="py-28 px-3">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                 <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg flex" style="min-height:400px; max-height:400px;">
 
                     <!-- lista de usuarios -->
-                    <div class="w-3/12 bg-gray-200 bg-opacity-25 border-r border-gray-200 overflow-y-scroll">
+                    <div class="w-4/12 bg-gray-200 bg-opacity-25 border-r border-gray-200 overflow-y-scroll">
                         <ul>
                             <li
                                 v-for="user in users" :key="user.id"
@@ -26,7 +26,7 @@
                         </ul>
                     </div>
                     <!-- caixa de mensagens -->
-                    <div class="w-9/12 flex flex-col justify-between">
+                    <div class="w-8/12 flex flex-col justify-between">
 
                         <!-- mensagens -->
                         <div class="w-full p-6 flex flex-col overflow-y-scroll">
@@ -60,17 +60,17 @@
                 </div>
             </div>
         </div>
-    </app-layout>
+    </PagesLayout>
 </template>
 
 <script>
-    import AppLayout from '@/Layouts/AppLayout'
+    import PagesLayout from '@/Layouts/PagesLayout'
     import store from '../store'
     import Vue from 'vue'
 
     export default {
         components: {
-            AppLayout,
+            PagesLayout,
 
         },
         data(){

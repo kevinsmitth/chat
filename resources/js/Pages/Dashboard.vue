@@ -1,7 +1,7 @@
 <template>
-    <app-layout>
+    <pages-layout>
         <template #header>
-            <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+            <h2 class="font-semibold text-xl text-yellow-200 leading-tight px-10">
                 Dashboard
             </h2>
         </template>
@@ -13,16 +13,16 @@
                 </div>
             </div>
         </div>
-    </app-layout>
+    </pages-layout>
 </template>
 
 <script>
-    import AppLayout from '@/Layouts/AppLayout'
+    import PagesLayout from '@/Layouts/PagesLayout'
     import Welcome from '@/Jetstream/Welcome'
 
     export default {
         components: {
-            AppLayout,
+            PagesLayout,
             Welcome,
         },
     }
