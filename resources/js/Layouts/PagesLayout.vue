@@ -2,9 +2,16 @@
     <div>
         <header>
             <div class="w-full h-20 bg-indigo-900 flex items-center border-b border-yellow-200">
-                <slot name="header"></slot>
-                <nav class="ml-auto">
-                    <ul class="flex mr-5">
+                <div class="w-3/12">
+                    <slot  name="header"></slot>
+                </div>
+                <div class="w-6/12">
+                    <a :href="route('home')">
+                        <img class="mx-auto" :src="'/images/ks.png'" alt="ks-logo" width="60" height="48">
+                    </a>
+                </div>
+                <div class="w-3/12">
+                    <ul class="float-right flex mr-5">
                         <li class="mx-3">
                             <a class="text-white hover:text-yellow-300"
                             :href="route('home')" :active="route().current('home')">
@@ -17,34 +24,44 @@
                                 Chat
                             </a>
                         </li>
-                        <li class="mx-3">
-                            <a class="text-white hover:text-yellow-300"
-                            :href="route('login')" :active="route().current('login')">
-                                Entrar
-                            </a>
-                        </li>
-                        <li class="mx-3" v-if="user">
-                            <a class="text-white hover:text-yellow-300"
-                            :href="route('dashboard')" :active="route().current('dashboard')">
-                                Dashboard
-                            </a>
-                        </li>
-                        <li class="mx-3" v-if="user">
-                            <a class="text-white hover:text-yellow-300"
-                            :href="route('profile.show')" :active="route().current('profile.show')">
-                                Perfil
-                            </a>
-                        </li>
+                        <template v-if="user">
+                            <li class="mx-3">
+                                <a class="text-white hover:text-yellow-300"
+                                :href="route('dashboard')" :active="route().current('dashboard')">
+                                    Dashboard
+                                </a>
+                            </li>
+                            <li class="mx-3">
+                                <a class="text-white hover:text-yellow-300"
+                                :href="route('profile.show')" :active="route().current('profile.show')">
+                                    Perfil
+                                </a>
+                            </li>
 
-                        <li class="mx-3" v-if="user">
-                            <form method="POST" @submit.prevent="logout">
-                                <button class="text-white hover:text-yellow-300" as="button">
-                                    Sair
-                                </button>
-                            </form>
-                        </li>
+                            <li class="mx-3">
+                                <form method="POST" @submit.prevent="logout">
+                                    <button class="text-white hover:text-yellow-300" as="button">
+                                        Sair
+                                    </button>
+                                </form>
+                            </li>
+                        </template>
+                        <template v-else>
+                            <li class="mx-3">
+                                <a class="text-white hover:text-yellow-300"
+                                :href="route('register')" :active="route().current('register')">
+                                    Cadastrar
+                                </a>
+                            </li>
+                            <li class="mx-3">
+                                <a class="text-white hover:text-yellow-300"
+                                :href="route('login')" :active="route().current('login')">
+                                    Entrar
+                                </a>
+                            </li>
+                        </template>
                     </ul>
-                </nav>
+                </div>
             </div>
         </header>
 
@@ -62,6 +79,35 @@
 
     </div>
 </template>
+<script>
+
+export default {
+    data() {
+        return {
+            now: new Date().getFullYear(),
+            user:null,
+        }
+
+    },
+    methods: {
+
+        logout() {
+            axios.post(route('logout').url()).then(response => {
+                window.location = '/';
+            })
+        },
+
+    },
+    mounted() {
+
+            axios.get(route('user.me').url()).then(response => {
+                this.user = response.data.user
+
+            })
+
+    },
+}
+</script>
 <style>
 
 html, body {
@@ -76,27 +122,8 @@ footer{
     bottom: 0;
     position: absolute;
 }
-</style>
-<script>
-
-export default {
-    data() {
-        return {
-            now: new Date().getFullYear(),
-        }
-    },
-    methods: {
-
-        logout() {
-            axios.post(route('logout').url()).then(response => {
-                window.location = '/';
-            })
-        },
-    },
-    meteor:{
-        user(){
-            return Meteor.user()
-        }
-    }
+:active{
+    @apply text-yellow-300;
+    color: #fac533 !important;
 }
-</script>
+</style>

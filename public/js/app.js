@@ -3183,10 +3183,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      now: new Date().getFullYear()
+      now: new Date().getFullYear(),
+      user: null
     };
   },
   methods: {
@@ -3196,10 +3199,12 @@ __webpack_require__.r(__webpack_exports__);
       });
     }
   },
-  meteor: {
-    user: function user() {
-      return Meteor.user();
-    }
+  mounted: function mounted() {
+    var _this = this;
+
+    axios.get(route('user.me').url()).then(function (response) {
+      _this.user = response.data.user;
+    });
   }
 });
 
@@ -3836,6 +3841,16 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Layouts_PagesLayout__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @/Layouts/PagesLayout */ "./resources/js/Layouts/PagesLayout.vue");
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -4659,7 +4674,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "html, body {\n  margin: 0;\n  padding: 0;\n  height: 100%;\n  background-color: #42389D;\n}\nfooter{\n  width: 100%;\n  bottom: 0;\n  position: absolute;\n}\n", ""]);
+exports.push([module.i, "html, body {\n  margin: 0;\n  padding: 0;\n  height: 100%;\n  background-color: #42389D;\n}\nfooter{\n  width: 100%;\n  bottom: 0;\n  position: absolute;\n}\n:active{\n  --text-opacity: 1;\n  color: #faca15;\n  color: rgba(250, 202, 21, var(--text-opacity));\n  color: #fac533 !important;\n}\n", ""]);
 
 // exports
 
@@ -54874,138 +54889,172 @@ var render = function() {
             "w-full h-20 bg-indigo-900 flex items-center border-b border-yellow-200"
         },
         [
-          _vm._t("header"),
+          _c("div", { staticClass: "w-3/12" }, [_vm._t("header")], 2),
           _vm._v(" "),
-          _c("nav", { staticClass: "ml-auto" }, [
-            _c("ul", { staticClass: "flex mr-5" }, [
-              _c("li", { staticClass: "mx-3" }, [
-                _c(
-                  "a",
-                  {
-                    staticClass: "text-white hover:text-yellow-300",
-                    attrs: {
-                      href: _vm.route("home"),
-                      active: _vm.route().current("home")
-                    }
-                  },
-                  [
-                    _vm._v(
-                      "\n                            Início\n                        "
-                    )
-                  ]
-                )
-              ]),
-              _vm._v(" "),
-              _c("li", { staticClass: "mx-3" }, [
-                _c(
-                  "a",
-                  {
-                    staticClass: "text-white hover:text-yellow-300",
-                    attrs: {
-                      href: _vm.route("chat"),
-                      active: _vm.route().current("chat")
-                    }
-                  },
-                  [
-                    _vm._v(
-                      "\n                            Chat\n                        "
-                    )
-                  ]
-                )
-              ]),
-              _vm._v(" "),
-              _c("li", { staticClass: "mx-3" }, [
-                _c(
-                  "a",
-                  {
-                    staticClass: "text-white hover:text-yellow-300",
-                    attrs: {
-                      href: _vm.route("login"),
-                      active: _vm.route().current("login")
-                    }
-                  },
-                  [
-                    _vm._v(
-                      "\n                            Entrar\n                        "
-                    )
-                  ]
-                )
-              ]),
-              _vm._v(" "),
-              _vm.user
-                ? _c("li", { staticClass: "mx-3" }, [
-                    _c(
-                      "a",
-                      {
-                        staticClass: "text-white hover:text-yellow-300",
-                        attrs: {
-                          href: _vm.route("dashboard"),
-                          active: _vm.route().current("dashboard")
-                        }
-                      },
-                      [
-                        _vm._v(
-                          "\n                            Dashboard\n                        "
-                        )
-                      ]
-                    )
-                  ])
-                : _vm._e(),
-              _vm._v(" "),
-              _vm.user
-                ? _c("li", { staticClass: "mx-3" }, [
-                    _c(
-                      "a",
-                      {
-                        staticClass: "text-white hover:text-yellow-300",
-                        attrs: {
-                          href: _vm.route("profile.show"),
-                          active: _vm.route().current("profile.show")
-                        }
-                      },
-                      [
-                        _vm._v(
-                          "\n                            Perfil\n                        "
-                        )
-                      ]
-                    )
-                  ])
-                : _vm._e(),
-              _vm._v(" "),
-              _vm.user
-                ? _c("li", { staticClass: "mx-3" }, [
-                    _c(
-                      "form",
-                      {
-                        attrs: { method: "POST" },
-                        on: {
-                          submit: function($event) {
-                            $event.preventDefault()
-                            return _vm.logout($event)
-                          }
-                        }
-                      },
-                      [
+          _c("div", { staticClass: "w-6/12" }, [
+            _c("a", { attrs: { href: _vm.route("home") } }, [
+              _c("img", {
+                staticClass: "mx-auto",
+                attrs: {
+                  src: "/images/ks.png",
+                  alt: "ks-logo",
+                  width: "60",
+                  height: "48"
+                }
+              })
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "w-3/12" }, [
+            _c(
+              "ul",
+              { staticClass: "float-right flex mr-5" },
+              [
+                _c("li", { staticClass: "mx-3" }, [
+                  _c(
+                    "a",
+                    {
+                      staticClass: "text-white hover:text-yellow-300",
+                      attrs: {
+                        href: _vm.route("home"),
+                        active: _vm.route().current("home")
+                      }
+                    },
+                    [
+                      _vm._v(
+                        "\n                            Início\n                        "
+                      )
+                    ]
+                  )
+                ]),
+                _vm._v(" "),
+                _c("li", { staticClass: "mx-3" }, [
+                  _c(
+                    "a",
+                    {
+                      staticClass: "text-white hover:text-yellow-300",
+                      attrs: {
+                        href: _vm.route("chat"),
+                        active: _vm.route().current("chat")
+                      }
+                    },
+                    [
+                      _vm._v(
+                        "\n                            Chat\n                        "
+                      )
+                    ]
+                  )
+                ]),
+                _vm._v(" "),
+                _vm.user
+                  ? [
+                      _c("li", { staticClass: "mx-3" }, [
                         _c(
-                          "button",
+                          "a",
                           {
                             staticClass: "text-white hover:text-yellow-300",
-                            attrs: { as: "button" }
+                            attrs: {
+                              href: _vm.route("dashboard"),
+                              active: _vm.route().current("dashboard")
+                            }
                           },
                           [
                             _vm._v(
-                              "\n                                Sair\n                            "
+                              "\n                                Dashboard\n                            "
                             )
                           ]
                         )
-                      ]
-                    )
-                  ])
-                : _vm._e()
-            ])
+                      ]),
+                      _vm._v(" "),
+                      _c("li", { staticClass: "mx-3" }, [
+                        _c(
+                          "a",
+                          {
+                            staticClass: "text-white hover:text-yellow-300",
+                            attrs: {
+                              href: _vm.route("profile.show"),
+                              active: _vm.route().current("profile.show")
+                            }
+                          },
+                          [
+                            _vm._v(
+                              "\n                                Perfil\n                            "
+                            )
+                          ]
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c("li", { staticClass: "mx-3" }, [
+                        _c(
+                          "form",
+                          {
+                            attrs: { method: "POST" },
+                            on: {
+                              submit: function($event) {
+                                $event.preventDefault()
+                                return _vm.logout($event)
+                              }
+                            }
+                          },
+                          [
+                            _c(
+                              "button",
+                              {
+                                staticClass: "text-white hover:text-yellow-300",
+                                attrs: { as: "button" }
+                              },
+                              [
+                                _vm._v(
+                                  "\n                                    Sair\n                                "
+                                )
+                              ]
+                            )
+                          ]
+                        )
+                      ])
+                    ]
+                  : [
+                      _c("li", { staticClass: "mx-3" }, [
+                        _c(
+                          "a",
+                          {
+                            staticClass: "text-white hover:text-yellow-300",
+                            attrs: {
+                              href: _vm.route("register"),
+                              active: _vm.route().current("register")
+                            }
+                          },
+                          [
+                            _vm._v(
+                              "\n                                Cadastrar\n                            "
+                            )
+                          ]
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c("li", { staticClass: "mx-3" }, [
+                        _c(
+                          "a",
+                          {
+                            staticClass: "text-white hover:text-yellow-300",
+                            attrs: {
+                              href: _vm.route("login"),
+                              active: _vm.route().current("login")
+                            }
+                          },
+                          [
+                            _vm._v(
+                              "\n                                Entrar\n                            "
+                            )
+                          ]
+                        )
+                      ])
+                    ]
+              ],
+              2
+            )
           ])
-        ],
-        2
+        ]
       )
     ]),
     _vm._v(" "),
@@ -56046,7 +56095,7 @@ var render = function() {
                 "h2",
                 {
                   staticClass:
-                    "font-semibold text-xl text-yellow-200 leading-tight px-10"
+                    "font-semibold text-lg text-yellow-200 leading-tight px-5"
                 },
                 [_vm._v("\n              Chat de Usuários\n          ")]
               )
@@ -56056,7 +56105,56 @@ var render = function() {
         }
       ])
     },
-    [_vm._v(" "), [_c("div", [_c("p", [_vm._v("opa")])])]],
+    [
+      _vm._v(" "),
+      [
+        _c("div", {}, [
+          _c(
+            "div",
+            {
+              staticClass:
+                "w-11/12 mx-auto mt-32 flex items-center justify-center"
+            },
+            [
+              _c("div", { staticClass: "w-10/12 mx-10 text-white" }, [
+                _c("p", { staticClass: "text-xl font-semibold" }, [
+                  _vm._v("Bem vindo(a)!")
+                ]),
+                _vm._v(" "),
+                _c("p", { staticClass: "text-justify" }, [
+                  _vm._v(
+                    "Para usufruir melhor do projeto, e poder enviar mensagens, emojis, e muito mais,\n                          voce precisa apenas se cadastrar, e o Chat será aberto automaticamente!"
+                  )
+                ]),
+                _vm._v(" "),
+                _c("p", [
+                  _vm._v(
+                    "É um projeto OpenSource que voce pode se divertir, ou até mesmo expandi-lo."
+                  )
+                ]),
+                _vm._v(" "),
+                _c("p", [
+                  _vm._v(
+                    "Use a sua imaginação e o mais importante, divirta-se!!!"
+                  )
+                ])
+              ]),
+              _vm._v(" "),
+              _c("iframe", {
+                staticClass: "w-full h-96",
+                attrs: {
+                  src: "https://www.youtube-nocookie.com/embed/FMrtSHAAPhM",
+                  frameborder: "0",
+                  allow:
+                    "accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture",
+                  allowfullscreen: ""
+                }
+              })
+            ]
+          )
+        ])
+      ]
+    ],
     2
   )
 }
@@ -72965,15 +73063,14 @@ __webpack_require__.r(__webpack_exports__);
 /*!*********************************************!*\
   !*** ./resources/js/Pages/Profile/Show.vue ***!
   \*********************************************/
-/*! no static exports found */
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Show_vue_vue_type_template_id_348d746c___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Show.vue?vue&type=template&id=348d746c& */ "./resources/js/Pages/Profile/Show.vue?vue&type=template&id=348d746c&");
 /* harmony import */ var _Show_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Show.vue?vue&type=script&lang=js& */ "./resources/js/Pages/Profile/Show.vue?vue&type=script&lang=js&");
-/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _Show_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__) if(["default"].indexOf(__WEBPACK_IMPORT_KEY__) < 0) (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _Show_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__[key]; }) }(__WEBPACK_IMPORT_KEY__));
-/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
 
@@ -73003,7 +73100,7 @@ component.options.__file = "resources/js/Pages/Profile/Show.vue"
 /*!**********************************************************************!*\
   !*** ./resources/js/Pages/Profile/Show.vue?vue&type=script&lang=js& ***!
   \**********************************************************************/
-/*! no static exports found */
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
