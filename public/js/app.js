@@ -4674,7 +4674,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "html, body {\n  margin: 0;\n  padding: 0;\n  height: 100%;\n  background-color: #42389D;\n}\nfooter{\n  width: 100%;\n  bottom: 0;\n  position: absolute;\n}\n:active{\n  --text-opacity: 1;\n  color: #faca15;\n  color: rgba(250, 202, 21, var(--text-opacity));\n  color: #fac533 !important;\n}\n", ""]);
+exports.push([module.i, "html, body {\n  margin: 0;\n  padding: 0;\n  height: 100%;\n  background-color: #42389D;\n}\nfooter{\n  width: 100%;\n  bottom: 0;\n  position: absolute;\n}\n\n", ""]);
 
 // exports
 

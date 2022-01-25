@@ -122,8 +122,5 @@ footer{
     bottom: 0;
     position: absolute;
 }
-:active{
-    @apply text-yellow-300;
-    color: #fac533 !important;
-}
+
 </style>
